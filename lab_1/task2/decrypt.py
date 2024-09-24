@@ -43,7 +43,7 @@ def decrypt_text(text_for_decrypt: str, arr_decrypt_letters: dict) -> str:
     return text_for_decrypt
 
 
-def write_result(path_decrypt: str, path_key: str, path_input: str) -> None:
+def write_result(path_decrypt: str, path_key: str,path_freq: str, path_input: str) -> None:
     """
     Write decrypted text and keys in file
     :param path_input: path of file with input encrypted text
@@ -56,6 +56,8 @@ def write_result(path_decrypt: str, path_key: str, path_input: str) -> None:
 
         keys = dict(zip(list(frequency(txt_reader(path_input))), ENCRYPTED_LETTERS))
 
+        freq=frequency(txt_reader(path_input))
+        json_writer(path_freq,freq)
         json_writer(path_key, keys)
     except Exception as ex:
         logging.error(f"Error in decryption or file can't be open or was not found: {ex}\n")
@@ -65,7 +67,7 @@ if __name__ == "__main__":
     paths = json_reader(PATHS)
     try:
         write_result(os.path.join(paths["folder"], paths["decrypt"]),
-                     os.path.join(paths["folder"], paths["key"]), os.path.join(paths["folder"], paths["input"]))
+                     os.path.join(paths["folder"], paths["key"]), os.path.join(paths["folder"], paths["frequency"]), os.path.join(paths["folder"], paths["input"]))
         logging.info(f"Text successfully decrypted and saved to file")
     except Exception as ex:
         logging.error(f"Error in decryption or file can't be open or was not found: {ex}\n")
