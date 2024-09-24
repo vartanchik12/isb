@@ -2,9 +2,14 @@ import logging
 import math
 import mpmath
 
-from constants import MAX_LENGTH_BLOCK, PI, SEQUENCE_PATH, TEST_RESULTS
+
 from file_work import json_reader, txt_writer
 
+constants = json_reader('constants.json')
+MAX_LENGTH_BLOCK = constants["MAX_LENGTH_BLOCK"]
+PI = constants["PI"]
+SEQUENCE_PATH = constants["SEQUENCE_PATH"]
+TEST_RESULTS = constants["TEST_RESULTS"]
 logging.basicConfig(level=logging.INFO)
 
 
